@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import type { NewCar } from '../models/Car';
 import { getCarById, updateCar } from '../services/carService';
+import axios from 'axios';
 
 export default function EditCarPage() {
   const { id } = useParams<{ id: string }>();
@@ -12,10 +13,27 @@ export default function EditCarPage() {
 
   useEffect(() => {
     if (!id) return;
-    getCarById(id).then(data => {
-      const { id: _, ...carData } = data; 
-      setCar(carData);
-    });
+    
+    const controller = new AbortController();
+
+    async function loadCar() {
+      try {
+        const data = await getCarById(id as string, controller.signal);
+        const { id: _, ...carData } = data; 
+        setCar(carData);
+      } catch (err) {
+        if (axios.isCancel(err)) {
+          return;
+        }
+        console.error('Błąd pobierania samochodu do edycji:', err);
+      }
+    }
+
+    loadCar();
+
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
   async function handleSubmit(e: React.FormEvent) {

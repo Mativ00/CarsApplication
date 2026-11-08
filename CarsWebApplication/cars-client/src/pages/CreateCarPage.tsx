@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import type { NewCar } from '../models/Car';
 import { createCar } from '../services/carService';
+import axios from 'axios';
 
 export default function CreateCarPage() {
   const navigate = useNavigate();
@@ -19,8 +20,10 @@ export default function CreateCarPage() {
     try {
       await createCar(car);
       navigate('/cars');
-    } catch (err) {
-      alert('Błąd podczas zapisywania');
+    } catch (caughtError) {
+      if (axios.isCancel(caughtError)) {
+    return;
+}
     }
   }
 
