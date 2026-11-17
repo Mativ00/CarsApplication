@@ -1,16 +1,17 @@
-import { NavLink, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
+import Navigation from '../components/Navigation';
 
 export default function RootLayout() {
   return (
-    <div>
-      <nav style={{ padding: '10px', background: '#eee', marginBottom: '20px' }}>
-        <NavLink to="/" style={{ marginRight: '15px' }}>Strona główna</NavLink>
-        <NavLink to="/cars" style={{ marginRight: '15px' }}>Samochody</NavLink>
-        <NavLink to="/cars/new">Dodaj samochód</NavLink>
-      </nav>
-      <main style={{ padding: '0 10px' }}>
+    <div className="app-container">
+      <header>
+        <Navigation />
+      </header>
+      
+      <main>
         <Outlet />
       </main>
+      
     </div>
   );
 }

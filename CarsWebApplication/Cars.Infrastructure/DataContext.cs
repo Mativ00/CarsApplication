@@ -1,15 +1,12 @@
 ﻿using Cars.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.ConstrainedExecution;
 
 namespace Cars.Infrastructure;
 
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<AppUser, IdentityRole, string>
 {
-    public DataContext(DbContextOptions<DataContext> options)
-        : base(options)
-    {
-    }
-
+    public DataContext(DbContextOptions<DataContext> options) : base(options) { }
     public DbSet<Car> Cars => Set<Car>();
 }

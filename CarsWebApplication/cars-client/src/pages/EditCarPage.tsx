@@ -19,6 +19,11 @@ export default function EditCarPage() {
     async function loadCar() {
       try {
         const data = await getCarById(id as string, controller.signal);
+        
+        if (data.productionDate) {
+          data.productionDate = data.productionDate.split('T')[0];
+        }
+
         const { id: _, ...carData } = data; 
         setCar(carData);
       } catch (err) {

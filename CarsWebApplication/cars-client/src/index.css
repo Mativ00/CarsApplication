@@ -13,29 +13,53 @@ body {
   color: var(--text);
 }
 
+main { 
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 1rem; 
+}
 
-main { max-width: 800px; margin: 0 auto; padding: 1rem; }
-
-
-nav {
+.navigation {
   background: #0d1117;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-nav a {
-  color: black;
+.navigation a {
+  color: var(--text);
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.2s;
 }
 
-nav a:hover { color: #fff; background: var(--card); }
-nav a.active { color: #fff; background: var(--primary); }
+.navigation a:hover { color: #fff; background: var(--card); }
+.navigation a.active { color: #fff; background: var(--primary); }
 
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.favorite-counter {
+  background-color: #d97706;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: white;
+}
 
 .card, .car-list li {
   background: var(--card);
@@ -50,6 +74,41 @@ nav a.active { color: #fff; background: var(--primary); }
 .car-list li { display: flex; justify-content: space-between; align-items: center; }
 .car-actions { display: flex; gap: 0.5rem; }
 
+.car-form {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  max-width: 400px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.car-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.car-form input {
+  background: #0d1117; 
+  color: #fff;
+  border: 1px solid #444; 
+  padding: 0.6rem;
+  border-radius: 4px; 
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: var(--danger);
+  font-weight: bold;
+  text-align: center;
+}
 
 form { display: flex; flex-direction: column; gap: 1rem; }
 
@@ -68,19 +127,29 @@ form { display: flex; flex-direction: column; gap: 1rem; }
   border-radius: 4px; width: 100%; box-sizing: border-box;
 }
 
-
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
 button {
   background: var(--primary); color: #fff;
   border: none; padding: 0.5rem 1rem;
   border-radius: 4px; cursor: pointer;
+  transition: all 0.2s;
 }
 
 button:hover { background: #2ea043; }
 
 button.danger { background: transparent; border: 1px solid var(--danger); color: var(--danger); }
 button.danger:hover { background: var(--danger); color: #fff; }
+
+.nav-button {
+  background: transparent;
+  border: 1px solid #444;
+}
+.nav-button:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
 .cars-toolbar {
   display: flex;
   gap: 20px;
@@ -91,9 +160,11 @@ button.danger:hover { background: var(--danger); color: #fff; }
 }
 
 .cars-toolbar input[type='search'] {
+  background: #0d1117; 
+  color: #fff;
   padding: 9px;
   font: inherit;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #444;
   border-radius: 6px;
 }
 
@@ -109,11 +180,4 @@ button.danger:hover { background: var(--danger); color: #fff; }
 
 .active-favorite {
   background-color: #d97706;
-}
-
-.favorite-counter {
-  margin-left: auto;
-  padding: 8px 12px;
-  color: white;
-  font-weight: 600;
 }
