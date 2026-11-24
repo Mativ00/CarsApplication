@@ -94,6 +94,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 app.UseCors("CorsPolicy");
 
 
@@ -116,6 +118,10 @@ try
 
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await IdentitySeed.SeedAsync(userManager, roleManager);
+    await context.Database.MigrateAsync();
+    await Seed.SeedData(context);
+    await FeatureSeed.SeedAsync(context);
     await IdentitySeed.SeedAsync(userManager, roleManager);
 
 }
